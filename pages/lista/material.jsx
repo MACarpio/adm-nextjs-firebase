@@ -9,6 +9,7 @@ export default function ListaMaterial({ lista }) {
   useEffect(() => {
     setList(lista);
   }, [lista]);
+
   return (
     <Layout>
       <div className="capitalize mb-5 text-2xl font-bold text-red-300">
@@ -18,12 +19,15 @@ export default function ListaMaterial({ lista }) {
       {list &&
         list.map((item) => (
           <div key={item.id} className="mb-3">
-            <Card nombre={item.nombre}></Card>
+            <Card nombre={item.image}></Card>
           </div>
         ))}
     </Layout>
   );
 }
-export async function getStaticProps() {
-  return { props: { lista: await fetchData(model.Material) } };
+export async function getServerSideProps() {
+  const lista = await fetchData(model.Material);
+  return {
+    props: { lista },
+  };
 }

@@ -24,6 +24,9 @@ export default function ListaCategoria({ lista }) {
     </Layout>
   );
 }
-export async function getStaticProps() {
-  return { props: { lista: await fetchData(model.Categoria) } };
+export async function getServerSideProps() {
+  const lista = await fetchData(model.Categoria);
+  return {
+    props: { lista },
+  };
 }
