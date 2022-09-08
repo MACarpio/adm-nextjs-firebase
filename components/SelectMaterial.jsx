@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { fetchMaterial } from "../firebase/cliente";
+import { fetchData } from "../firebase/cliente";
 import { model } from "../Data/model";
 
 async function ObtenerMaterial() {
-  const data = await fetchMaterial();
+  const data = await fetchData(`${model.Material}`);
   return data;
 }
 export default function SelectMaterial({ onChange }) {
@@ -24,11 +24,12 @@ export default function SelectMaterial({ onChange }) {
         <option disabled selected value>
           Seleccione
         </option>
-        {list.map((item) => (
-          <option key={item.id} value={`${item.nombre}`}>
-            {item.nombre}
-          </option>
-        ))}
+        {list &&
+          list.map((item) => (
+            <option key={item.id} value={`${item.nombre}`}>
+              {item.nombre}
+            </option>
+          ))}
       </select>
     </div>
   );

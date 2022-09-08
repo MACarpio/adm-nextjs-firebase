@@ -4,7 +4,7 @@ import { fetchData } from "../../firebase/cliente";
 import { model } from "../../Data/model";
 import Card from "../../components/Card";
 
-export default function ListaProducto({ lista }) {
+export default function ListaMaterial({ lista }) {
   const [list, setList] = useState([]);
   useEffect(() => {
     setList(lista);
@@ -12,18 +12,18 @@ export default function ListaProducto({ lista }) {
   return (
     <Layout>
       <div className="capitalize mb-5 text-2xl font-bold text-red-300">
-        Productos
+        Materiales
       </div>
-      {list.length == 0 && <h1>No existen Productos</h1>}
+      {list.length == 0 && <h1>No existen Materiales</h1>}
       {list &&
         list.map((item) => (
           <div key={item.id} className="mb-3">
-            <Card nombre={item.nombre} precio={item.precio}></Card>
+            <Card nombre={item.nombre}></Card>
           </div>
         ))}
     </Layout>
   );
 }
 export async function getStaticProps() {
-  return { props: { lista: await fetchData(model.Producto) } };
+  return { props: { lista: await fetchData(model.Material) } };
 }

@@ -11,14 +11,17 @@ export const producto = {
   categoria: "",
   estado: "true",
   home: "true",
+  image: "",
 };
 
 export const categoria = {
   nombre: "",
   descripcion: "",
+  image: "",
 };
 
 export const material = {
   nombre: "",
   descripcion: "",
+  image: "",
 };

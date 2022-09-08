@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { fetchCategoria } from "../firebase/cliente";
-import { model, categoria } from "../Data/model";
+import { fetchData } from "../firebase/cliente";
+import { model } from "../Data/model";
 
 async function ObtenerCategoria() {
-  const data = await fetchCategoria();
+  const data = await fetchData(`${model.Categoria}`);
   return data;
 }
 export default function SelectCategorias({ onChange }) {
@@ -25,11 +25,12 @@ export default function SelectCategorias({ onChange }) {
         <option disabled selected>
           Seleccione
         </option>
-        {list.map((item) => (
-          <option key={item.id} value={`${item.nombre}`}>
-            {item.nombre}
-          </option>
-        ))}
+        {list &&
+          list.map((item) => (
+            <option key={item.id} value={`${item.nombre}`}>
+              {item.nombre}
+            </option>
+          ))}
       </select>
     </div>
   );

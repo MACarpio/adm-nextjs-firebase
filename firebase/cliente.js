@@ -17,45 +17,15 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 //Fucnion para agregar producto a Firebase
-export const addProduct = (data, tipo) => {
+export const addData = (data, tipo) => {
   const productsCollection = collection(db, tipo);
   return addDoc(productsCollection, data);
 };
 
 //Funciones para obtener datos de Firebase
-export const fetchProducts = async () => {
+export const fetchData = async (tipo) => {
   try {
-    const ref = collection(db, "producto");
-    const snapshot = await getDocs(ref);
-    const docs = [];
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      const id = doc.id;
-      docs.push({ id, ...data });
-    });
-    return docs;
-  } catch (error) {
-    console.log(error);
-  }
-};
-export const fetchCategoria = async () => {
-  try {
-    const ref = collection(db, "categoria");
-    const snapshot = await getDocs(ref);
-    const docs = [];
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      const id = doc.id;
-      docs.push({ id, ...data });
-    });
-    return docs;
-  } catch (error) {
-    console.log(error);
-  }
-};
-export const fetchMaterial = async () => {
-  try {
-    const ref = collection(db, "material");
+    const ref = collection(db, `${tipo}`);
     const snapshot = await getDocs(ref);
     const docs = [];
     snapshot.forEach((doc) => {
@@ -69,10 +39,8 @@ export const fetchMaterial = async () => {
   }
 };
 
-export const uploadImage = ({ file, carp }) => {
-  const storageRef = ref(storage, `/${carp}/${file.name}`);
-
-  // 'file' comes from the Blob or File API
+export const uploadImage = ({ file, carp, type }) => {
+  const storageRef = ref(storage, `${type}/${carp}/${file.name}`);
   uploadBytes(storageRef, file).then((snapshot) => {
     console.log("Uploaded a blob or file!", snapshot);
   });

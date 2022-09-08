@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
-import { fetchCategoria } from "../../firebase/cliente";
+import { fetchData } from "../../firebase/cliente";
+import { model } from "../../Data/model";
+import Card from "../../components/Card";
 
 export default function ListaCategoria({ lista }) {
   const [list, setList] = useState([]);
@@ -9,21 +11,19 @@ export default function ListaCategoria({ lista }) {
   }, [lista]);
   return (
     <Layout>
-      <div className="uppercase mb-5 text-3xl font-bold text-red-300">hola</div>
-      {list === undefined && <h1>no hay elementos</h1>}
+      <div className="capitalize mb-5 text-2xl font-bold text-red-300">
+        Categorias
+      </div>
+      {list.length == 0 && <h1>No existen Categorias</h1>}
       {list &&
         list.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white text-black p-5 rounded-lg shadow-lg shadow-red-300 "
-          >
-            <h1 className="text-lg font-bold">{item["nombre"]}</h1>
-            <h2 className="text-base">{item.precio}</h2>
+          <div key={item.id} className="mb-3">
+            <Card nombre={item.nombre}></Card>
           </div>
         ))}
     </Layout>
   );
 }
 export async function getStaticProps() {
-  return { props: { lista: await fetchCategoria() } };
+  return { props: { lista: await fetchData(model.Categoria) } };
 }

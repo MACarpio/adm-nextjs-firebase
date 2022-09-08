@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { addProduct, uploadImage } from "../../firebase/cliente";
+import { addData, uploadImage } from "../../firebase/cliente";
 import { useRouter } from "next/router";
 import { model, producto } from "../../Data/model";
 import Textarea from "../../components/Textarea";
@@ -27,8 +27,12 @@ export default function Producto() {
   //Funcion para agregar producto a firebase
   const handleSubmit = (e) => {
     e.preventDefault();
-    uploadImage({ file: image, carp: `${product.nombre}` });
-    addProduct(product, `${model.Producto}`)
+    uploadImage({
+      type: model.Producto,
+      carp: `${product.nombre}`,
+      file: image,
+    });
+    addData(product, `${model.Producto}`)
       .then(() => {
         router.reload();
       })
@@ -89,7 +93,8 @@ export default function Producto() {
             name={"descripcion"}
             onChange={handleChange}
           />
-          <div className="flex w-full max-w-lg gap-2 lg:w-3/4">
+          <div className="flex w-full max-w-lg gap-2 lg:w-3/4 flex-col">
+            <label className="font-medium text-sm ">Imagen :</label>
             <input
               className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none  dark:placeholder-gray-400"
               aria-describedby="user_avatar_help"
