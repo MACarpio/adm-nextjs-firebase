@@ -19,7 +19,7 @@ export default function ListaMaterial({ lista }) {
       {list &&
         list.map((item) => (
           <div key={item.id} className="mb-3">
-            <Card nombre={item.image}></Card>
+            <Card nombre={item.nombre} src={item.src}></Card>
           </div>
         ))}
     </Layout>

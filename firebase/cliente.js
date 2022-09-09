@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB88HAkBTSs7OIRsVrfS3Z_21mqOyZewas",
@@ -39,9 +39,13 @@ export const fetchData = async (tipo) => {
   }
 };
 
-export const uploadImage = ({ file, carp, type }) => {
-  const storageRef = ref(storage, `${type}/${carp}/${file.name}`);
-  uploadBytes(storageRef, file).then((snapshot) => {
-    console.log("Uploaded a blob or file!", snapshot);
-  });
+export const uploadImage = ({ file, id, type }) => {
+  const storageRef = ref(storage, `${type}/${id}`);
+  return uploadBytes(storageRef, file);
+};
+
+export const downloadImageURL = ({ id, type }) => {
+  const storageRef = ref(storage, `${type}/${id}`);
+  const url = getDownloadURL(storageRef);
+  return url;
 };

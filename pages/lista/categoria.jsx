@@ -18,7 +18,7 @@ export default function ListaCategoria({ lista }) {
       {list &&
         list.map((item) => (
           <div key={item.id} className="mb-3">
-            <Card nombre={item.nombre}></Card>
+            <Card nombre={item.nombre} src={item.src}></Card>
           </div>
         ))}
     </Layout>

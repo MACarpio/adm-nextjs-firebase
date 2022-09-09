@@ -10,8 +10,8 @@ const Input = ({ title, type, onChange, name, value }) => {
         className="text-black max-w-lg w-full border-none text-center rounded-md p-1 outline-none text-sm focus:outline focus:outline-red-300 "
         type={type}
         placeholder={`Ingrese ${title}`}
-        onChange={onChange}
         name={name}
+        onChange={onChange}
       />
     </div>
   );

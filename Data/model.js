@@ -4,6 +4,7 @@ export const model = {
   Categoria: "categoria",
 };
 export const producto = {
+  productoID: "",
   nombre: "",
   precio: 0,
   descripcion: "",
@@ -11,17 +12,19 @@ export const producto = {
   categoria: "",
   estado: "true",
   home: "true",
-  image: "",
+  src: "",
 };
 
 export const categoria = {
+  categoriaID: "",
   nombre: "",
   descripcion: "",
-  image: "",
+  src: "",
 };
 
 export const material = {
+  materialID: "",
   nombre: "",
   descripcion: "",
-  image: "",
+  src: "",
 };
